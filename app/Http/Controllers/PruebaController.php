@@ -13,7 +13,7 @@ class PruebaController extends Controller
      */
     public function index()
     {
-        return 'hola desde controller';
+        return 'hola desde controller algo';
     }
 
     public function nombre($nombre)
