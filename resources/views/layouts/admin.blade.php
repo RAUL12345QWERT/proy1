@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
 
     <!-- Fonts -->
@@ -103,6 +103,18 @@
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     {!!Html::script('js/script.js')!!}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('js/axios.js')}}"></script>
+    <script>
+        window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+        
+        if (token) {
+            window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+        } else {
+            console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+        }
+    </script>
     <script src="{{ asset('js/Vue.js')}}"></script>
     @yield('scripts')
 </body>

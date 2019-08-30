@@ -2,7 +2,7 @@
 @include('alerts.success')
 
 @section('content')
-        <table class="table table-sm table-hover">
+        <table class="table table-sm table-hover" id="app">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">ID</th>
@@ -12,20 +12,18 @@
               </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
-                <tr>
-                    <td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
+                <tr v-for="usuario in usuarios">
+                    <td>@{{usuario.id}}</td>
+                    <td>@{{usuario.name}}</td>
+                    <td>@{{usuario.email}}</td>
                     
                     <td>
-                      {!!link_to_route('usuario.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+                      
                     </td>
                 </tr>
-                @endforeach
             </tbody>
         </table>
-        <div id="app">
+        <div id="app9">
           @{{ message }}
         </div>
         <div id="app-2">
@@ -34,5 +32,5 @@
             to see my dynamically bound title!
           </span>
         </div>
-        {!!$users->render()!!}
+       
 @endsection

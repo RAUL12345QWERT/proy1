@@ -3,6 +3,10 @@
 namespace Cinema\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Cinema\Genre;
+use Session;
+use Redirect;
+use Illuminate\Routing\Route;
 
 class GeneroController extends Controller
 {
@@ -12,8 +16,9 @@ class GeneroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {    
+        $genres = Genre::paginate(3);
+        return view('genero.index', compact('genres'));
     }
 
     /**
@@ -29,8 +34,9 @@ class GeneroController extends Controller
      public function store(Request $request)
     {
         if($request->ajax()){
+            Genre::create($request->all());
             return response()->json([
-                "mensaje" => $request->all()
+                "mensaje" => "creado"
             ]);
         }
     }
@@ -67,5 +73,8 @@ class GeneroController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function devuelve(){
+        return Genre::get();
     }
 }
